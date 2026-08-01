@@ -1,0 +1,6 @@
+# per-machine hook state (turn counter for the tracker nudge)
+.claude/.tracker-state.json
+
+# python bytecode
+__pycache__/
+*.pyc
