@@ -1,0 +1,604 @@
+<title>Greybox v1 — Architecture Firm Site</title>
+<style>
+  :root {
+    --ground: #F2F0EC;
+    --ground-2: #EAE7E1;
+    --ink: #17150F;
+    --ink-soft: #55524A;
+    --hatch-bg: #D9D5CD;
+    --hatch-line: #C6C1B6;
+    --rule: #CFCAC0;
+    --accent: #33526B;
+    --accent-ink: #FFFFFF;
+
+    --font-sans: "Helvetica Neue", Helvetica, Arial, ui-sans-serif, sans-serif;
+    --font-note: Georgia, "Times New Roman", serif;
+
+    --step-5: clamp(2.6rem, 6.5vw, 5.2rem);
+    --step-4: clamp(2rem, 4.4vw, 3.4rem);
+    --step-3: clamp(1.5rem, 2.8vw, 2.1rem);
+    --step-1: 1.125rem;
+    --step-0: 1rem;
+    --step--1: 0.8125rem;
+    --step--2: 0.6875rem;
+
+    --gutter: clamp(1.25rem, 4vw, 3rem);
+    --band: clamp(4rem, 9vw, 8rem);
+    --max: 1200px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #15181B;
+      --ground-2: #1B1F23;
+      --ink: #E8E6E1;
+      --ink-soft: #9BA0A4;
+      --hatch-bg: #22272C;
+      --hatch-line: #31383E;
+      --rule: #2E343A;
+      --accent: #8FB0C9;
+      --accent-ink: #10141A;
+    }
+  }
+  :root[data-theme="light"] {
+    --ground: #F2F0EC; --ground-2: #EAE7E1; --ink: #17150F; --ink-soft: #55524A;
+    --hatch-bg: #D9D5CD; --hatch-line: #C6C1B6; --rule: #CFCAC0;
+    --accent: #33526B; --accent-ink: #FFFFFF;
+  }
+  :root[data-theme="dark"] {
+    --ground: #15181B; --ground-2: #1B1F23; --ink: #E8E6E1; --ink-soft: #9BA0A4;
+    --hatch-bg: #22272C; --hatch-line: #31383E; --rule: #2E343A;
+    --accent: #8FB0C9; --accent-ink: #10141A;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: var(--step-0);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding-inline: var(--gutter); }
+
+  /* ---- greybox notice ---- */
+  .greybox-note {
+    display: flex; justify-content: center; gap: 0.6em;
+    padding: 0.55rem var(--gutter);
+    border-bottom: 1px solid var(--rule);
+    font-size: var(--step--2);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+  .greybox-note strong { color: var(--accent); font-weight: 600; }
+
+  /* ---- header ---- */
+  header.site {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 2rem;
+    padding: 1.5rem var(--gutter);
+    max-width: var(--max); margin: 0 auto;
+  }
+  .wordmark {
+    font-size: var(--step-1);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .wordmark sup { font-weight: 400; color: var(--accent); margin-left: 2px; }
+  nav.primary { display: flex; gap: clamp(1rem, 3vw, 2.5rem); }
+  nav.primary a {
+    font-size: var(--step--1);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding-bottom: 2px;
+    background: linear-gradient(var(--accent), var(--accent)) left bottom / 0 1px no-repeat;
+    transition: background-size 0.3s ease, color 0.3s ease;
+  }
+  nav.primary a:hover { color: var(--ink); background-size: 100% 1px; }
+
+  /* ---- placeholder image blocks ---- */
+  .ph {
+    position: relative;
+    background:
+      repeating-linear-gradient(-45deg, transparent 0 14px, var(--hatch-line) 14px 15px),
+      var(--hatch-bg);
+    border: 1px solid var(--rule);
+    display: flex; align-items: flex-end;
+    overflow: hidden;
+  }
+  .ph .tag {
+    margin: 0.75rem;
+    padding: 0.3rem 0.6rem;
+    background: var(--ground);
+    border: 1px solid var(--rule);
+    font-size: var(--step--2);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+  .ph .tag b { color: var(--accent); font-weight: 600; }
+
+  /* ---- shared band rhythm ---- */
+  section { padding-block: var(--band); }
+  .label {
+    font-size: var(--step--1);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 1.5rem;
+    font-weight: 500;
+  }
+  h1, h2, h3 { text-wrap: balance; margin: 0; font-weight: 300; }
+
+  /* ---- hero ---- */
+  .hero { padding-top: clamp(3rem, 7vw, 6rem); }
+  .hero h1 {
+    font-size: var(--step-5);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    max-width: 12ch;
+  }
+  .hero .dek {
+    font-family: var(--font-note);
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: var(--step-1);
+    max-width: 44ch;
+    margin: 2rem 0 0;
+  }
+  .hero-media { margin-top: clamp(2.5rem, 6vw, 5rem); }
+  .hero-media .ph { aspect-ratio: 5 / 3; }
+
+  /* ---- projects index ---- */
+  .projects { border-top: 1px solid var(--rule); }
+  .project-row {
+    display: grid;
+    grid-template-columns: 7fr 4fr;
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    align-items: end;
+    padding-block: clamp(2rem, 5vw, 3.5rem);
+  }
+  .project-row + .project-row { border-top: 1px solid var(--rule); }
+  .project-row:nth-child(even of .project-row) { grid-template-columns: 4fr 7fr; }
+  .project-row:nth-child(even of .project-row) .media { order: 2; }
+  .project-row .media .ph { aspect-ratio: 4 / 3; transition: transform 0.5s ease; }
+  .project-row .info h3 { font-size: var(--step-3); font-weight: 400; }
+  .project-row .meta {
+    font-size: var(--step--1);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0.75rem 0 1.25rem;
+  }
+  .project-row .visit {
+    font-size: var(--step--1);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+  }
+  a.project-link { display: contents; }
+  a.project-link:hover .ph { transform: scale(1.015); }
+
+  /* ---- practice ---- */
+  .practice { background: var(--ground-2); border-block: 1px solid var(--rule); }
+  .practice .cols {
+    display: grid; grid-template-columns: 3fr 2fr;
+    gap: clamp(2rem, 6vw, 5rem);
+  }
+  .practice h2 { font-size: var(--step-4); max-width: 18ch; }
+  .practice p.body { max-width: 58ch; color: var(--ink-soft); }
+  .facts { border-top: 1px solid var(--rule); margin-top: 0.5rem; }
+  .facts dl { margin: 0; }
+  .facts .fact {
+    display: flex; justify-content: space-between; gap: 1rem;
+    padding: 1rem 0; border-bottom: 1px solid var(--rule);
+    font-size: var(--step--1);
+  }
+  .facts dt { letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); }
+  .facts dd { margin: 0; font-variant-numeric: tabular-nums; }
+
+  /* ---- contact ---- */
+  .contact h2 { font-size: var(--step-4); }
+  .contact .cols {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: start;
+  }
+  .contact p.body { color: var(--ink-soft); max-width: 44ch; }
+  form.inquiry { display: grid; gap: 1.25rem; }
+  .field { display: grid; gap: 0.4rem; }
+  .field label {
+    font-size: var(--step--2);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .field input, .field textarea {
+    font: inherit; color: var(--ink);
+    background: transparent;
+    border: 0; border-bottom: 1px solid var(--rule);
+    padding: 0.5rem 0;
+  }
+  .field input:focus, .field textarea:focus { border-bottom-color: var(--accent); }
+  form.inquiry button {
+    justify-self: start;
+    font: inherit;
+    font-size: var(--step--1);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    background: var(--accent);
+    border: 0;
+    padding: 0.9rem 2rem;
+    cursor: pointer;
+  }
+  .form-note {
+    font-family: var(--font-note); font-style: italic;
+    font-size: var(--step--1); color: var(--ink-soft);
+  }
+
+  /* ---- footer ---- */
+  footer.site {
+    border-top: 1px solid var(--rule);
+    padding: 2.5rem var(--gutter) 3rem;
+    max-width: var(--max); margin: 0 auto;
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1.5rem;
+    font-size: var(--step--1); color: var(--ink-soft);
+  }
+  footer.site .fine { font-family: var(--font-note); font-style: italic; }
+
+  /* ---- case study ---- */
+  .back {
+    display: inline-block;
+    font-size: var(--step--1);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-soft); margin-bottom: 2.5rem;
+  }
+  .back:hover { color: var(--accent); }
+  .case-head h1 { font-size: var(--step-4); max-width: 16ch; }
+  .case-meta {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1.5rem;
+    border-block: 1px solid var(--rule);
+    padding-block: 1.5rem;
+    margin-top: 2.5rem;
+    font-size: var(--step--1);
+  }
+  .case-meta dt { letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 0.3rem; }
+  .case-meta dd { margin: 0; }
+  .case-hero { margin-block: clamp(2rem, 5vw, 4rem) 0; }
+  .case-hero .ph { aspect-ratio: 21 / 9; }
+  .case-body { max-width: 62ch; margin-inline: auto; }
+  .case-body p { color: var(--ink-soft); margin: 0 0 1.4em; }
+  .case-body p:first-of-type { color: var(--ink); font-size: var(--step-1); }
+  .two-up {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: clamp(1rem, 3vw, 2rem);
+    margin-block: var(--band);
+  }
+  .two-up .ph { aspect-ratio: 4 / 5; }
+  blockquote.pull {
+    margin: var(--band) auto;
+    max-width: 26ch;
+    font-family: var(--font-note); font-style: italic;
+    font-size: var(--step-3); line-height: 1.35;
+    text-align: center;
+    color: var(--ink);
+  }
+  blockquote.pull footer {
+    margin-top: 1.25rem;
+    font-family: var(--font-sans); font-style: normal;
+    font-size: var(--step--1); letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .case-wide { margin-block: var(--band); }
+  .case-wide .ph { aspect-ratio: 16 / 9; }
+  .drawings .ph { aspect-ratio: 3 / 2; background:
+      repeating-linear-gradient(0deg, transparent 0 39px, var(--hatch-line) 39px 40px),
+      repeating-linear-gradient(90deg, transparent 0 39px, var(--hatch-line) 39px 40px),
+      var(--ground-2);
+  }
+  .next-project {
+    border-top: 1px solid var(--rule);
+    padding-top: var(--band);
+    text-align: center;
+  }
+  .next-project .label { margin-bottom: 1rem; }
+  .next-project a h2 { font-size: var(--step-4); display: inline-block; }
+  .next-project a:hover h2 { color: var(--accent); }
+
+  /* ---- view switching ---- */
+  .view { display: none; }
+  .view.active { display: block; }
+
+  /* ---- reveal motion ---- */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .project-row .media .ph { transition: none; }
+  }
+
+  /* ---- small screens ---- */
+  @media (max-width: 720px) {
+    .project-row, .project-row:nth-child(even of .project-row) { grid-template-columns: 1fr; align-items: start; }
+    .project-row:nth-child(even of .project-row) .media { order: 0; }
+    .practice .cols, .contact .cols { grid-template-columns: 1fr; }
+    .two-up { grid-template-columns: 1fr; }
+    .two-up .ph { aspect-ratio: 4 / 3; }
+    nav.primary { gap: 1rem; }
+  }
+</style>
+
+<div class="greybox-note">
+  <span><strong>Greybox v1</strong> — layout, type &amp; motion only. Hatched blocks are photographs we don't have yet; †&nbsp;marks names pending tracker questions.</span>
+</div>
+
+<header class="site">
+  <a class="wordmark" href="#/">Selkridge Architects<sup>†Q2</sup></a>
+  <nav class="primary" aria-label="Primary">
+    <a href="#projects" data-home-anchor>Projects</a>
+    <a href="#practice" data-home-anchor>Practice</a>
+    <a href="#contact" data-home-anchor>Contact</a>
+  </nav>
+</header>
+
+<!-- ================= HOME ================= -->
+<main id="view-home" class="view active">
+
+  <section class="hero wrap">
+    <p class="label reveal">Architecture · Est. 19—†Q3</p>
+    <h1 class="reveal">Built for the long&nbsp;view.</h1>
+    <p class="dek reveal">Residential and commercial work†Q3, designed with the patience
+      of a practice that intends its buildings to outlive it.</p>
+    <div class="hero-media reveal">
+      <div class="ph" role="img" aria-label="Placeholder for hero photograph">
+        <span class="tag"><b>5:3 hero</b> — the single best photograph the firm owns (Q4)</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="projects wrap" id="projects">
+    <p class="label reveal">Selected work</p>
+
+    <a class="project-link" href="#/project">
+      <div class="project-row reveal">
+        <div class="media">
+          <div class="ph" role="img" aria-label="Placeholder for Hillcrest Residence photograph">
+            <span class="tag"><b>4:3</b> — exterior, golden hour (Q4)</span>
+          </div>
+        </div>
+        <div class="info">
+          <h3>Hillcrest Residence†</h3>
+          <p class="meta">Residential† · 20—</p>
+          <span class="visit">View project</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="project-link" href="#/project">
+      <div class="project-row reveal">
+        <div class="media">
+          <div class="ph" role="img" aria-label="Placeholder for civic project photograph">
+            <span class="tag"><b>4:3</b> — interior, occupied &amp; in use (Q4)</span>
+          </div>
+        </div>
+        <div class="info">
+          <h3>Meridian Hall†</h3>
+          <p class="meta">Commercial† · 20—</p>
+          <span class="visit">View project</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="project-link" href="#/project">
+      <div class="project-row reveal">
+        <div class="media">
+          <div class="ph" role="img" aria-label="Placeholder for renovation project photograph">
+            <span class="tag"><b>4:3</b> — detail: material &amp; craft (Q4)</span>
+          </div>
+        </div>
+        <div class="info">
+          <h3>Waterline Renovation†</h3>
+          <p class="meta">Historic renovation† · 20—</p>
+          <span class="visit">View project</span>
+        </div>
+      </div>
+    </a>
+  </section>
+
+  <section class="practice" id="practice">
+    <div class="wrap cols">
+      <div>
+        <p class="label reveal">The practice</p>
+        <h2 class="reveal">A small firm, deliberately.</h2>
+        <p class="body reveal">Every project here is led personally, from first
+          site walk to final punch list. That is not a scaling strategy —
+          it is the product. Clients get the principal, not an org chart.†
+          <em>(Real narrative comes from Q3: what he builds, and for whom.)</em></p>
+      </div>
+      <div class="facts reveal">
+        <dl>
+          <div class="fact"><dt>Years in practice</dt><dd>—†</dd></div>
+          <div class="fact"><dt>Completed projects</dt><dd>—†</dd></div>
+          <div class="fact"><dt>Region</dt><dd>—†Q2</dd></div>
+          <div class="fact"><dt>Licensure</dt><dd>—†</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact wrap" id="contact">
+    <p class="label reveal">Contact</p>
+    <div class="cols">
+      <div class="reveal">
+        <h2>Start a conversation.</h2>
+        <p class="body">A first conversation costs nothing and commits you to
+          nothing. Tell us what you're imagining — or send the address of a
+          building you love.</p>
+        <p class="form-note">Wired later: HubSpot Forms API (D3) + second
+          destination (D4). No HubSpot branding on this form (R4).</p>
+      </div>
+      <form class="inquiry reveal" onsubmit="event.preventDefault()">
+        <div class="field">
+          <label for="f-name">Name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="f-email">Email</label>
+          <input id="f-email" name="email" type="email" autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="f-msg">What are you imagining?</label>
+          <textarea id="f-msg" name="message" rows="4"></textarea>
+        </div>
+        <button type="submit">Send inquiry</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= CASE STUDY ================= -->
+<main id="view-project" class="view">
+  <div class="wrap" style="padding-top: 2rem;">
+    <a class="back" href="#/">&larr; All projects</a>
+
+    <div class="case-head">
+      <p class="label">Case study†</p>
+      <h1>Hillcrest Residence†</h1>
+      <dl class="case-meta">
+        <div><dt>Location</dt><dd>—†Q2</dd></div>
+        <div><dt>Type</dt><dd>Residential†Q3</dd></div>
+        <div><dt>Completed</dt><dd>20—†</dd></div>
+        <div><dt>Status</dt><dd>Built &amp; occupied†</dd></div>
+        <div><dt>Photography</dt><dd>—†Q4</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <div class="case-hero wrap">
+    <div class="ph" role="img" aria-label="Placeholder for case study hero photograph">
+      <span class="tag"><b>21:9 hero</b> — establishing shot, building in its landscape (Q4)</span>
+    </div>
+  </div>
+
+  <section class="wrap">
+    <div class="case-body">
+      <p>Every case study opens with the client's problem, not the firm's
+        solution — one paragraph a homeowner would actually recognize
+        themselves in.†</p>
+      <p>Then the approach: the two or three real decisions that shaped the
+        building, told plainly. Why the house turns away from the street. Why
+        the roof does that. What the budget forced, and what it freed. This is
+        placeholder rhythm — the real stories come from Q3's answers and a
+        conversation with the architect about each project.†</p>
+      <p>Copy stays short. On project pages, photography carries the argument
+        (R2) and text annotates it — never the reverse.</p>
+    </div>
+
+    <div class="two-up">
+      <div class="ph reveal" role="img" aria-label="Placeholder for detail photograph, left">
+        <span class="tag"><b>4:5</b> — stair / joinery detail (Q4)</span>
+      </div>
+      <div class="ph reveal" role="img" aria-label="Placeholder for detail photograph, right">
+        <span class="tag"><b>4:5</b> — light study, no people (Q4)</span>
+      </div>
+    </div>
+
+    <blockquote class="pull reveal">
+      &ldquo;A short line from the client, in their own words — worth more
+      than any paragraph we could write.&rdquo;†
+      <footer>Client name†, Hillcrest Residence</footer>
+    </blockquote>
+
+    <div class="case-wide reveal">
+      <div class="ph" role="img" aria-label="Placeholder for interior photograph">
+        <span class="tag"><b>16:9</b> — main living space, dusk (Q4)</span>
+      </div>
+    </div>
+
+    <div class="drawings reveal">
+      <p class="label">Drawings</p>
+      <div class="ph" role="img" aria-label="Placeholder for floor plan drawing">
+        <span class="tag"><b>3:2</b> — simplified floor plan, redrawn for the web (grid = drawing, not photo)</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="next-project wrap">
+    <p class="label">Next project</p>
+    <a href="#/project"><h2>Meridian Hall† &rarr;</h2></a>
+  </section>
+</main>
+
+<footer class="site">
+  <span>&copy; 20— Selkridge Architects<sup>†Q2</sup></span>
+  <span class="fine">† placeholder — firm name (Q2), work mix (Q3), photography (Q4) pending. Tracker: arch-site/TRACKER.md</span>
+</footer>
+
+<script>
+  (function () {
+    var views = { home: document.getElementById('view-home'),
+                  project: document.getElementById('view-project') };
+
+    function route() {
+      var isProject = location.hash === '#/project';
+      views.home.classList.toggle('active', !isProject);
+      views.project.classList.toggle('active', isProject);
+      window.scrollTo({ top: 0, behavior: 'auto' });
+      observeReveals();
+    }
+
+    // Home nav anchors: make sure we're on the home view first.
+    document.querySelectorAll('[data-home-anchor]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        if (location.hash === '#/project') {
+          var target = a.getAttribute('href');
+          location.hash = '#/';
+          setTimeout(function () {
+            var el = document.querySelector(target);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }, 50);
+        }
+      });
+    });
+
+    var observer = null;
+    function observeReveals() {
+      if (!('IntersectionObserver' in window) ||
+          window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      if (observer) observer.disconnect();
+      observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); }
+        });
+      }, { threshold: 0.15 });
+      document.querySelectorAll('.view.active .reveal').forEach(function (el) {
+        if (!el.classList.contains('in')) observer.observe(el);
+      });
+    }
+
+    window.addEventListener('hashchange', route);
+    route();
+  })();
+</script>

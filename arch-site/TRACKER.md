@@ -19,10 +19,10 @@
 
 | | |
 |---|---|
-| **Phase** | 0 — discovery / pre-mockup |
-| **Blocked on** | Aaron: reference sites he likes (gathering now) |
-| **Next deliverable** | Greybox homepage + project-page mockup, as a private Artifact |
-| **Nothing is live** | no repo scaffold, no domain, no HubSpot portal yet |
+| **Phase** | 1 — mockup |
+| **Blocked on** | Aaron: feedback on greybox v1 |
+| **Next deliverable** | Greybox v2, revised from Aaron's feedback |
+| **Nothing is live** | no site scaffold, no domain, no HubSpot portal yet |
 
 ---
 
@@ -49,7 +49,7 @@ shakes loose when it's answered.
 
 | # | Question | Blocks | Status |
 |---|---|---|---|
-| Q1 | **3–5 architecture firm sites he likes** (or Aaron likes) | tone, density, type, motion — the whole mockup | ⏳ Aaron gathering |
+| Q1 | **Reference sites** — veragouthxilema.com + maman-corp.com (2026-08-01). Shared direction: minimal, generous whitespace, restrained sans type, photography-forward, understated heritage confidence. Drove greybox v1. | — | ✅ answered |
 | Q2 | **Firm name + city** | copy, page titles, local SEO, domain choice | 📦 boxed |
 | Q3 | **What does he build?** residential / commercial / historic reno / institutional | tone and structure differ a lot between these | 📦 boxed |
 | Q4 | **Do professional project photos exist?** How many, of what? | Biggest single factor in the design. If only phone snaps and CAD renderings exist, we design around that deliberately instead of pretending. | 📦 boxed |
@@ -68,12 +68,14 @@ Legend: ⏳ in flight · 📦 boxed, deliberately deferred · ✅ answered
 ### Now
 - [x] Decide platform + HubSpot approach (→ D1–D4)
 - [x] Stand up this tracker + the skill and hooks that maintain it
-- [ ] **Wait on Q1** (reference sites) — then build the greybox mockup
+- [x] Greybox v1: homepage + case-study page (`arch-site/mockups/greybox-v1.html`,
+      published as private Artifact) — placeholders labeled with the tracker
+      question they wait on (†Q2/Q3/Q4)
+- [ ] **Wait on Aaron** — greybox v1 feedback, then iterate
 
 ### Next
-- [ ] Greybox mockup: homepage + one project case-study page. Real layout, type
-      and motion; placeholder imagery. Published as a private Artifact.
-- [ ] Iterate mockup with Aaron until the feel is right
+- [ ] Greybox v2 from feedback; repeat until the feel is right
+- [ ] Answering Q2–Q4 replaces the † placeholders (name, work mix, photos)
 
 ### Later
 - [ ] Scaffold Astro project + content collections for projects
@@ -90,6 +92,8 @@ Legend: ⏳ in flight · 📦 boxed, deliberately deferred · ✅ answered
 - 2026-08-01 — Platform recommendation delivered and accepted (D1–D5)
 - 2026-08-01 — Tracker, `project-tracker` skill, and PreCompact/SessionStart/Stop hooks built
 - 2026-08-01 — Project moved to its own repo, `oasplans` (Q9 ✅, R1 retired)
+- 2026-08-01 — Q1 answered (2 reference sites); greybox v1 built and published
+  as a private Artifact for review
 
 ---
 
