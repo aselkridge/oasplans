@@ -9,7 +9,8 @@
 > the bottom marked AUTOSNAPSHOT is written by a script — don't hand-edit it.
 
 **Project:** website for Aaron's father's architecture firm, with HubSpot as CRM
-**Branch:** `claude/architecture-website-hubspot-gnkmg0`
+**Repo:** `aselkridge/oasplans` (moved from `aarons-portfolio` on 2026-08-01, → Q9)
+**Branch:** `claude/portfolio-repo-migration-mp3od6`
 **Started:** 2026-08-01
 
 ---
@@ -56,7 +57,7 @@ shakes loose when it's answered.
 | Q6 | **Domain name** — owned already, or to buy? | deploy config, HubSpot tracking domain | 📦 boxed |
 | Q7 | **Who owns the HubSpot account?** Aaron or his dad? Portal ID? | form wiring, and who gets billed if it's ever upgraded | 📦 boxed |
 | Q8 | **Any EU/UK traffic expected?** | whether a cookie-consent gate on the HubSpot tracking script is required | 📦 boxed |
-| Q9 | **Own repo, or stay inside `aarons-portfolio`?** | See Risks R1 — recommend its own repo before scaffolding | 📦 boxed |
+| Q9 | **Own repo, or stay inside `aarons-portfolio`?** — own repo: `oasplans`. Tracker + hooks migrated 2026-08-01; nothing else came along, nothing was lost. | ~~was: see R1~~ | ✅ answered |
 
 Legend: ⏳ in flight · 📦 boxed, deliberately deferred · ✅ answered
 
@@ -73,7 +74,6 @@ Legend: ⏳ in flight · 📦 boxed, deliberately deferred · ✅ answered
 - [ ] Greybox mockup: homepage + one project case-study page. Real layout, type
       and motion; placeholder imagery. Published as a private Artifact.
 - [ ] Iterate mockup with Aaron until the feel is right
-- [ ] Resolve Q9 (repo) before any scaffolding lands
 
 ### Later
 - [ ] Scaffold Astro project + content collections for projects
@@ -89,16 +89,14 @@ Legend: ⏳ in flight · 📦 boxed, deliberately deferred · ✅ answered
 ### Done
 - 2026-08-01 — Platform recommendation delivered and accepted (D1–D5)
 - 2026-08-01 — Tracker, `project-tracker` skill, and PreCompact/SessionStart/Stop hooks built
+- 2026-08-01 — Project moved to its own repo, `oasplans` (Q9 ✅, R1 retired)
 
 ---
 
 ## Risks / watch-list
 
-- **R1 — wrong repo.** This project currently lives inside `aarons-portfolio`,
-  whose `CLAUDE.md` is entirely about Aaronautics (orbit code, spaceflight art
-  direction, `docs/` served by GitHub Pages). Those instructions will actively
-  conflict once real site code lands, and `docs/` is *public*. Recommend a
-  dedicated repo before scaffolding. This tracker moves with the project. (→ Q9)
+- ~~**R1 — wrong repo.**~~ Resolved 2026-08-01: project migrated to its own repo,
+  `oasplans`, before any scaffolding landed. (→ Q9)
 - **R2 — photography is the product.** A beautiful shell around weak imagery
   reads as a weak firm. If good photos don't exist, that's the first spend,
   before any code. (→ Q4)
