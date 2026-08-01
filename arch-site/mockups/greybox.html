@@ -1,4 +1,4 @@
-<title>Greybox v2 — Architecture Firm Site</title>
+<title>Greybox v3 — Architecture Firm Site</title>
 <style>
   :root {
     --ground: #F2F0EC;
@@ -54,6 +54,7 @@
   html { scroll-behavior: smooth; }
   body {
     margin: 0;
+    overflow-x: hidden;
     background: var(--ground);
     color: var(--ink);
     font-family: var(--font-sans);
@@ -168,8 +169,27 @@
     max-width: 44ch;
     margin: 2rem 0 0;
   }
-  .hero-media { margin-top: clamp(2.5rem, 6vw, 5rem); }
-  .hero-media .ph { aspect-ratio: 5 / 3; }
+  .hero-media {
+    margin-top: clamp(2.5rem, 6vw, 5rem);
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+  }
+  .hero-media .ph {
+    aspect-ratio: auto;
+    height: clamp(420px, 78vh, 820px);
+    border-inline: 0;
+  }
+  .hero-media .tag { margin-left: var(--gutter); }
+
+  /* ---- work filter hint ---- */
+  .work-filters {
+    display: flex; flex-wrap: wrap; gap: 1.25rem 2rem;
+    margin: 0 0 2.5rem;
+    font-size: var(--step--1);
+    letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .work-filters span { color: var(--ink-soft); }
+  .work-filters .on { color: var(--ink); border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
 
   /* ---- projects index: varied-aspect portfolio grid ---- */
   .projects { border-top: 1px solid var(--rule); }
@@ -311,8 +331,13 @@
   }
   .case-meta dt { letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 0.3rem; }
   .case-meta dd { margin: 0; }
-  .case-hero { margin-block: clamp(2rem, 5vw, 4rem) 0; }
-  .case-hero .ph { aspect-ratio: 21 / 9; }
+  .case-hero {
+    margin-block: clamp(2rem, 5vw, 4rem) 0;
+    width: 100vw; margin-left: calc(50% - 50vw);
+    padding-inline: 0;
+  }
+  .case-hero .ph { aspect-ratio: 21 / 9; border-inline: 0; }
+  .case-hero .tag { margin-left: var(--gutter); }
   .case-body { max-width: 62ch; margin-inline: auto; }
   .case-body p { color: var(--ink-soft); margin: 0 0 1.4em; }
   .case-body p:first-of-type { color: var(--ink); font-size: var(--step-1); }
@@ -379,7 +404,7 @@
 </style>
 
 <div class="greybox-note">
-  <span><strong>Greybox v2</strong> — layout, type &amp; motion only. Hatched blocks are photographs we don't have yet; †&nbsp;marks names pending tracker questions.</span>
+  <span><strong>Greybox v3</strong> — layout, type &amp; motion only. Hatched blocks are photographs we don't have yet; †&nbsp;marks names pending tracker questions.</span>
 </div>
 
 <header class="site">
@@ -403,13 +428,21 @@
       to outlive it.</p>
     <div class="hero-media reveal">
       <div class="ph" role="img" aria-label="Placeholder for hero photograph">
-        <span class="tag"><b>5:3 hero</b> — the single best photograph the firm owns (Q4)</span>
+        <span class="tag"><b>Full-bleed hero, ~78vh</b> — the single best photograph the firm owns (Q4). Edge to edge, no frame (Van Duysen).</span>
       </div>
     </div>
   </section>
 
   <section class="projects wrap" id="projects">
     <p class="label reveal">Selected work</p>
+
+    <div class="work-filters reveal" aria-hidden="true">
+      <span class="on">All</span>
+      <span>Residential†</span>
+      <span>Commercial†</span>
+      <span>Historic reno†</span>
+      <span class="tagline" style="font-family: var(--font-note); font-style: italic; text-transform: none; letter-spacing: 0;">— taxonomy hint, inert until Q3 fixes the real categories</span>
+    </div>
 
     <div class="work-grid">
       <a class="tile w7 r43 reveal" href="#/project">
@@ -537,7 +570,7 @@
     </div>
   </div>
 
-  <div class="case-hero wrap">
+  <div class="case-hero">
     <div class="ph" role="img" aria-label="Placeholder for case study hero photograph">
       <span class="tag"><b>21:9 hero</b> — establishing shot, building in its landscape (Q4)</span>
     </div>

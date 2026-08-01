@@ -20,8 +20,8 @@
 | | |
 |---|---|
 | **Phase** | 1 — mockup |
-| **Blocked on** | Aaron: feedback on greybox v2 |
-| **Next deliverable** | Greybox v3, revised from Aaron's feedback |
+| **Blocked on** | Aaron: feedback on greybox v3 |
+| **Next deliverable** | Greybox v4, revised from Aaron's feedback |
 | **Nothing is live** | no site scaffold, no domain, no HubSpot portal yet |
 
 ---
@@ -49,7 +49,7 @@ shakes loose when it's answered.
 
 | # | Question | Blocks | Status |
 |---|---|---|---|
-| Q1 | **Reference sites** — 6 total (2026-08-01): veragouthxilema.com, maman-corp.com, walkerwarner.com, studiorhe.com, wgp-architects.com, bloom3d.studio. Unanimous direction: minimal, whitespace-heavy, restrained sans, photography-forward, quiet heritage confidence. Specific patterns adopted in v2: varied-aspect portfolio grid (Walker Warner, WGP), "Est. 19—" brand anchor (Studio RHE), recognition band (Walker Warner), street-address grounding (WGP). | — | ✅ answered |
+| Q1 | **Reference sites** — 7 total (2026-08-01): veragouthxilema.com, maman-corp.com, walkerwarner.com, studiorhe.com, wgp-architects.com, bloom3d.studio, vincentvanduysen.com. Unanimous direction: minimal, whitespace-heavy, restrained sans, photography-forward, quiet heritage confidence. Patterns adopted: varied-aspect portfolio grid (Walker Warner, WGP), "Est. 19—" anchor (Studio RHE), recognition band (Walker Warner), address grounding (WGP), full-bleed edge-to-edge heroes + work taxonomy (Van Duysen). | — | ✅ answered |
 | Q2 | **Firm name + city** | copy, page titles, local SEO, domain choice | 📦 boxed |
 | Q3 | **What does he build?** residential / commercial / historic reno / institutional | tone and structure differ a lot between these | 📦 boxed |
 | Q4 | **Do professional project photos exist?** How many, of what? | Biggest single factor in the design. If only phone snaps and CAD renderings exist, we design around that deliberately instead of pretending. | 📦 boxed |
@@ -68,14 +68,15 @@ Legend: ⏳ in flight · 📦 boxed, deliberately deferred · ✅ answered
 ### Now
 - [x] Decide platform + HubSpot approach (→ D1–D4)
 - [x] Stand up this tracker + the skill and hooks that maintain it
-- [x] Greybox v1 → v2: homepage + case-study page (`arch-site/mockups/greybox.html`,
+- [x] Greybox v1 → v3: homepage + case-study page (`arch-site/mockups/greybox.html`,
       published as private Artifact) — placeholders labeled with the tracker
-      question they wait on (†Q2/Q3/Q4). v2 folds in 4 more references:
-      varied-aspect work grid, Est. anchor, recognition band, address in footer.
-- [ ] **Wait on Aaron** — greybox v2 feedback, then iterate
+      question they wait on (†Q2/Q3/Q4). v2: varied-aspect work grid, Est.
+      anchor, recognition band, address in footer. v3: full-bleed heroes,
+      work-category filter hint (Van Duysen).
+- [ ] **Wait on Aaron** — greybox v3 feedback, then iterate
 
 ### Next
-- [ ] Greybox v3 from feedback; repeat until the feel is right
+- [ ] Greybox v4 from feedback; repeat until the feel is right
 - [ ] Answering Q2–Q4 replaces the † placeholders (name, work mix, photos)
 
 ### Later
