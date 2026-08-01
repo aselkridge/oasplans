@@ -1,4 +1,4 @@
-<title>Greybox v1 — Architecture Firm Site</title>
+<title>Greybox v2 — Architecture Firm Site</title>
 <style>
   :root {
     --ground: #F2F0EC;
@@ -94,8 +94,17 @@
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
+    display: inline-block;
   }
   .wordmark sup { font-weight: 400; color: var(--accent); margin-left: 2px; }
+  .wordmark .est {
+    display: block;
+    font-size: var(--step--2);
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    margin-top: 0.15rem;
+  }
   nav.primary { display: flex; gap: clamp(1rem, 3vw, 2.5rem); }
   nav.primary a {
     font-size: var(--step--1);
@@ -162,37 +171,58 @@
   .hero-media { margin-top: clamp(2.5rem, 6vw, 5rem); }
   .hero-media .ph { aspect-ratio: 5 / 3; }
 
-  /* ---- projects index ---- */
+  /* ---- projects index: varied-aspect portfolio grid ---- */
   .projects { border-top: 1px solid var(--rule); }
-  .project-row {
+  .work-grid {
     display: grid;
-    grid-template-columns: 7fr 4fr;
-    gap: clamp(1.5rem, 4vw, 3.5rem);
-    align-items: end;
-    padding-block: clamp(2rem, 5vw, 3.5rem);
+    grid-template-columns: repeat(12, 1fr);
+    gap: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2.5rem);
+    align-items: start;
   }
-  .project-row + .project-row { border-top: 1px solid var(--rule); }
-  .project-row:nth-child(even of .project-row) { grid-template-columns: 4fr 7fr; }
-  .project-row:nth-child(even of .project-row) .media { order: 2; }
-  .project-row .media .ph { aspect-ratio: 4 / 3; transition: transform 0.5s ease; }
-  .project-row .info h3 { font-size: var(--step-3); font-weight: 400; }
-  .project-row .meta {
+  .tile { display: block; }
+  .tile .ph { transition: transform 0.5s ease; }
+  .tile:hover .ph { transform: scale(1.015); }
+  .tile .caption {
+    display: flex; flex-wrap: wrap; justify-content: space-between;
+    gap: 0.25rem 1rem;
+    margin-top: 0.8rem;
+  }
+  .tile h3 {
+    font-size: var(--step-1); font-weight: 400;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+  .tile:hover h3 { border-bottom-color: var(--accent); }
+  .tile .meta {
     font-size: var(--step--1);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    letter-spacing: 0.1em; text-transform: uppercase;
     color: var(--ink-soft);
-    margin: 0.75rem 0 1.25rem;
+    margin: 0; align-self: baseline;
   }
-  .project-row .visit {
+  .tile.w7 { grid-column: span 7; }
+  .tile.w6 { grid-column: span 6; }
+  .tile.w5 { grid-column: span 5; }
+  .tile.r43 .ph { aspect-ratio: 4 / 3; }
+  .tile.r34 .ph { aspect-ratio: 3 / 4; }
+  .tile.r11 .ph { aspect-ratio: 1 / 1; }
+  .tile.r1610 .ph { aspect-ratio: 16 / 10; }
+  .tile.r32 .ph { aspect-ratio: 3 / 2; }
+  .tile.drop { margin-top: clamp(2rem, 6vw, 5rem); }
+
+  /* ---- recognition ---- */
+  .recognition { border-top: 1px solid var(--rule); }
+  .recognition ul {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem 3rem;
+  }
+  .recognition li {
+    border-top: 1px solid var(--rule);
+    padding-top: 1rem;
     font-size: var(--step--1);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    border-bottom: 1px solid var(--accent);
-    padding-bottom: 2px;
+    color: var(--ink-soft);
   }
-  a.project-link { display: contents; }
-  a.project-link:hover .ph { transform: scale(1.015); }
+  .recognition li b { display: block; color: var(--ink); font-weight: 500; margin-bottom: 0.2rem; }
 
   /* ---- practice ---- */
   .practice { background: var(--ground-2); border-block: 1px solid var(--rule); }
@@ -337,8 +367,10 @@
 
   /* ---- small screens ---- */
   @media (max-width: 720px) {
-    .project-row, .project-row:nth-child(even of .project-row) { grid-template-columns: 1fr; align-items: start; }
-    .project-row:nth-child(even of .project-row) .media { order: 0; }
+    .work-grid { grid-template-columns: 1fr; }
+    .tile.w7, .tile.w6, .tile.w5 { grid-column: auto; }
+    .tile.drop { margin-top: 0; }
+    .tile.r34 .ph, .tile.r11 .ph { aspect-ratio: 4 / 3; }
     .practice .cols, .contact .cols { grid-template-columns: 1fr; }
     .two-up { grid-template-columns: 1fr; }
     .two-up .ph { aspect-ratio: 4 / 3; }
@@ -347,11 +379,12 @@
 </style>
 
 <div class="greybox-note">
-  <span><strong>Greybox v1</strong> — layout, type &amp; motion only. Hatched blocks are photographs we don't have yet; †&nbsp;marks names pending tracker questions.</span>
+  <span><strong>Greybox v2</strong> — layout, type &amp; motion only. Hatched blocks are photographs we don't have yet; †&nbsp;marks names pending tracker questions.</span>
 </div>
 
 <header class="site">
-  <a class="wordmark" href="#/">Selkridge Architects<sup>†Q2</sup></a>
+  <a class="wordmark" href="#/">Selkridge Architects<sup>†Q2</sup>
+    <span class="est">Est. 19—†</span></a>
   <nav class="primary" aria-label="Primary">
     <a href="#projects" data-home-anchor>Projects</a>
     <a href="#practice" data-home-anchor>Practice</a>
@@ -365,8 +398,9 @@
   <section class="hero wrap">
     <p class="label reveal">Architecture · Est. 19—†Q3</p>
     <h1 class="reveal">Built for the long&nbsp;view.</h1>
-    <p class="dek reveal">Residential and commercial work†Q3, designed with the patience
-      of a practice that intends its buildings to outlive it.</p>
+    <p class="dek reveal">Residential and commercial work†Q3 in and around —†Q2,
+      designed with the patience of a practice that intends its buildings
+      to outlive it.</p>
     <div class="hero-media reveal">
       <div class="ph" role="img" aria-label="Placeholder for hero photograph">
         <span class="tag"><b>5:3 hero</b> — the single best photograph the firm owns (Q4)</span>
@@ -377,50 +411,49 @@
   <section class="projects wrap" id="projects">
     <p class="label reveal">Selected work</p>
 
-    <a class="project-link" href="#/project">
-      <div class="project-row reveal">
-        <div class="media">
-          <div class="ph" role="img" aria-label="Placeholder for Hillcrest Residence photograph">
-            <span class="tag"><b>4:3</b> — exterior, golden hour (Q4)</span>
-          </div>
+    <div class="work-grid">
+      <a class="tile w7 r43 reveal" href="#/project">
+        <div class="ph" role="img" aria-label="Placeholder for Hillcrest Residence photograph">
+          <span class="tag"><b>4:3</b> — exterior, golden hour (Q4)</span>
         </div>
-        <div class="info">
-          <h3>Hillcrest Residence†</h3>
-          <p class="meta">Residential† · 20—</p>
-          <span class="visit">View project</span>
-        </div>
-      </div>
-    </a>
+        <div class="caption"><h3>Hillcrest Residence†</h3><p class="meta">Residential† · —†Q2 · 20—</p></div>
+      </a>
 
-    <a class="project-link" href="#/project">
-      <div class="project-row reveal">
-        <div class="media">
-          <div class="ph" role="img" aria-label="Placeholder for civic project photograph">
-            <span class="tag"><b>4:3</b> — interior, occupied &amp; in use (Q4)</span>
-          </div>
+      <a class="tile w5 r34 drop reveal" href="#/project">
+        <div class="ph" role="img" aria-label="Placeholder for Meridian Hall photograph">
+          <span class="tag"><b>3:4</b> — interior, occupied &amp; in use (Q4)</span>
         </div>
-        <div class="info">
-          <h3>Meridian Hall†</h3>
-          <p class="meta">Commercial† · 20—</p>
-          <span class="visit">View project</span>
-        </div>
-      </div>
-    </a>
+        <div class="caption"><h3>Meridian Hall†</h3><p class="meta">Commercial† · 20—</p></div>
+      </a>
 
-    <a class="project-link" href="#/project">
-      <div class="project-row reveal">
-        <div class="media">
-          <div class="ph" role="img" aria-label="Placeholder for renovation project photograph">
-            <span class="tag"><b>4:3</b> — detail: material &amp; craft (Q4)</span>
-          </div>
+      <a class="tile w5 r11 reveal" href="#/project">
+        <div class="ph" role="img" aria-label="Placeholder for Waterline Renovation photograph">
+          <span class="tag"><b>1:1</b> — detail: material &amp; craft (Q4)</span>
         </div>
-        <div class="info">
-          <h3>Waterline Renovation†</h3>
-          <p class="meta">Historic renovation† · 20—</p>
-          <span class="visit">View project</span>
+        <div class="caption"><h3>Waterline Renovation†</h3><p class="meta">Historic reno† · 20—</p></div>
+      </a>
+
+      <a class="tile w7 r1610 drop reveal" href="#/project">
+        <div class="ph" role="img" aria-label="Placeholder for Orchard House photograph">
+          <span class="tag"><b>16:10</b> — building in its landscape (Q4)</span>
         </div>
-      </div>
-    </a>
+        <div class="caption"><h3>Orchard House†</h3><p class="meta">Residential† · 20—</p></div>
+      </a>
+
+      <a class="tile w6 r32 reveal" href="#/project">
+        <div class="ph" role="img" aria-label="Placeholder for Foundry Offices photograph">
+          <span class="tag"><b>3:2</b> — street elevation (Q4)</span>
+        </div>
+        <div class="caption"><h3>Foundry Offices†</h3><p class="meta">Commercial† · 20—</p></div>
+      </a>
+
+      <a class="tile w6 r32 reveal" href="#/project">
+        <div class="ph" role="img" aria-label="Placeholder for Chapel Green photograph">
+          <span class="tag"><b>3:2</b> — dusk, lights on (Q4)</span>
+        </div>
+        <div class="caption"><h3>Chapel Green†</h3><p class="meta">Institutional† · 20—</p></div>
+      </a>
+    </div>
   </section>
 
   <section class="practice" id="practice">
@@ -442,6 +475,17 @@
         </dl>
       </div>
     </div>
+  </section>
+
+  <section class="recognition wrap">
+    <p class="label reveal">Recognition</p>
+    <ul class="reveal">
+      <li><b>—† Award, 20—</b>Awarding body — project name</li>
+      <li><b>—† Award, 20—</b>Awarding body — project name</li>
+      <li><b>Featured in —†</b>Publication, 20—</li>
+    </ul>
+    <p class="form-note" style="margin-top:1.5rem;">Only if real ones exist —
+      an empty trophy shelf gets cut, not faked. (ask alongside Q3)</p>
   </section>
 
   <section class="contact wrap" id="contact">
@@ -549,7 +593,7 @@
 </main>
 
 <footer class="site">
-  <span>&copy; 20— Selkridge Architects<sup>†Q2</sup></span>
+  <span>&copy; 20— Selkridge Architects<sup>†Q2</sup> · — Street, —†Q2</span>
   <span class="fine">† placeholder — firm name (Q2), work mix (Q3), photography (Q4) pending. Tracker: arch-site/TRACKER.md</span>
 </footer>
 

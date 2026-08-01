@@ -20,8 +20,8 @@
 | | |
 |---|---|
 | **Phase** | 1 — mockup |
-| **Blocked on** | Aaron: feedback on greybox v1 |
-| **Next deliverable** | Greybox v2, revised from Aaron's feedback |
+| **Blocked on** | Aaron: feedback on greybox v2 |
+| **Next deliverable** | Greybox v3, revised from Aaron's feedback |
 | **Nothing is live** | no site scaffold, no domain, no HubSpot portal yet |
 
 ---
@@ -49,7 +49,7 @@ shakes loose when it's answered.
 
 | # | Question | Blocks | Status |
 |---|---|---|---|
-| Q1 | **Reference sites** — veragouthxilema.com + maman-corp.com (2026-08-01). Shared direction: minimal, generous whitespace, restrained sans type, photography-forward, understated heritage confidence. Drove greybox v1. | — | ✅ answered |
+| Q1 | **Reference sites** — 6 total (2026-08-01): veragouthxilema.com, maman-corp.com, walkerwarner.com, studiorhe.com, wgp-architects.com, bloom3d.studio. Unanimous direction: minimal, whitespace-heavy, restrained sans, photography-forward, quiet heritage confidence. Specific patterns adopted in v2: varied-aspect portfolio grid (Walker Warner, WGP), "Est. 19—" brand anchor (Studio RHE), recognition band (Walker Warner), street-address grounding (WGP). | — | ✅ answered |
 | Q2 | **Firm name + city** | copy, page titles, local SEO, domain choice | 📦 boxed |
 | Q3 | **What does he build?** residential / commercial / historic reno / institutional | tone and structure differ a lot between these | 📦 boxed |
 | Q4 | **Do professional project photos exist?** How many, of what? | Biggest single factor in the design. If only phone snaps and CAD renderings exist, we design around that deliberately instead of pretending. | 📦 boxed |
@@ -68,13 +68,14 @@ Legend: ⏳ in flight · 📦 boxed, deliberately deferred · ✅ answered
 ### Now
 - [x] Decide platform + HubSpot approach (→ D1–D4)
 - [x] Stand up this tracker + the skill and hooks that maintain it
-- [x] Greybox v1: homepage + case-study page (`arch-site/mockups/greybox-v1.html`,
+- [x] Greybox v1 → v2: homepage + case-study page (`arch-site/mockups/greybox.html`,
       published as private Artifact) — placeholders labeled with the tracker
-      question they wait on (†Q2/Q3/Q4)
-- [ ] **Wait on Aaron** — greybox v1 feedback, then iterate
+      question they wait on (†Q2/Q3/Q4). v2 folds in 4 more references:
+      varied-aspect work grid, Est. anchor, recognition band, address in footer.
+- [ ] **Wait on Aaron** — greybox v2 feedback, then iterate
 
 ### Next
-- [ ] Greybox v2 from feedback; repeat until the feel is right
+- [ ] Greybox v3 from feedback; repeat until the feel is right
 - [ ] Answering Q2–Q4 replaces the † placeholders (name, work mix, photos)
 
 ### Later
@@ -103,7 +104,9 @@ Legend: ⏳ in flight · 📦 boxed, deliberately deferred · ✅ answered
   `oasplans`, before any scaffolding landed. (→ Q9)
 - **R2 — photography is the product.** A beautiful shell around weak imagery
   reads as a weak firm. If good photos don't exist, that's the first spend,
-  before any code. (→ Q4)
+  before any code. (→ Q4) *Mitigation option: Aaron's references include
+  bloom3d.studio, a photoreal 3D visualization studio — commissioned renders
+  are a credible substitute or supplement if the photo archive is thin.*
 - **R3 — local SEO outweighs design** for inquiry volume. "Architect in
   \[city\]" plus a Google Business Profile will out-earn any clever interaction.
 - **R4 — HubSpot free tier puts HubSpot branding on embedded forms.** Using the
