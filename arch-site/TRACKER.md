@@ -49,7 +49,7 @@ shakes loose when it's answered.
 
 | # | Question | Blocks | Status |
 |---|---|---|---|
-| Q1 | **Reference sites** — 7 total (2026-08-01): veragouthxilema.com, maman-corp.com, walkerwarner.com, studiorhe.com, wgp-architects.com, bloom3d.studio, vincentvanduysen.com. Unanimous direction: minimal, whitespace-heavy, restrained sans, photography-forward, quiet heritage confidence. Patterns adopted: varied-aspect portfolio grid (Walker Warner, WGP), "Est. 19—" anchor (Studio RHE), recognition band (Walker Warner), address grounding (WGP), full-bleed edge-to-edge heroes + work taxonomy (Van Duysen). | — | ✅ answered |
+| Q1 | **Reference sites** — 13 total (2026-08-01), three batches: veragouthxilema, maman-corp, walkerwarner, studiorhe, wgp-architects, bloom3d.studio, vincentvanduysen, tsurutaarchitects, heatherwick, tatianabilbao, adjaye, mvrdv, davidchipperfield. Unanimous direction: minimal, whitespace-heavy, restrained sans, photography-forward. Patterns adopted through v3: varied-aspect grid (Walker Warner, WGP), Est. anchor (Studio RHE), recognition band (Walker Warner), address grounding (WGP), full-bleed heroes + taxonomy (Van Duysen). Batch 3 added no new structure — see Q10 (tone) it raised. | — | ✅ answered |
 | Q2 | **Firm name + city** | copy, page titles, local SEO, domain choice | 📦 boxed |
 | Q3 | **What does he build?** residential / commercial / historic reno / institutional | tone and structure differ a lot between these | 📦 boxed |
 | Q4 | **Do professional project photos exist?** How many, of what? | Biggest single factor in the design. If only phone snaps and CAD renderings exist, we design around that deliberately instead of pretending. | 📦 boxed |
@@ -58,6 +58,8 @@ shakes loose when it's answered.
 | Q7 | **Who owns the HubSpot account?** Aaron or his dad? Portal ID? | form wiring, and who gets billed if it's ever upgraded | 📦 boxed |
 | Q8 | **Any EU/UK traffic expected?** | whether a cookie-consent gate on the HubSpot tracking script is required | 📦 boxed |
 | Q9 | **Own repo, or stay inside `aarons-portfolio`?** — own repo: `oasplans`. Tracker + hooks migrated 2026-08-01; nothing else came along, nothing was lost. | ~~was: see R1~~ | ✅ answered |
+
+| Q10 | **Copy tone: warm-human or austere-gallery?** The references split — Heatherwick/MVRDV are warm and conversational ("spaces that make you smile"); Bilbao/Chipperfield/Tsuruta are near-silent gallery curation. Greybox v3 sits between, leaning warm. Recommendation: stay warm-quiet — austere works for starchitects whose work arrives by reputation; a local firm's site must welcome an inquiry (D4, R3). | final copy voice | ⏳ Aaron to confirm with v3 feedback |
 
 Legend: ⏳ in flight · 📦 boxed, deliberately deferred · ✅ answered
 
