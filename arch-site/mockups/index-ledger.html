@@ -1,0 +1,569 @@
+<title>Direction B — The Index</title>
+<style>
+  :root {
+    --paper: #FAFAF9;
+    --paper-2: #F1F1EE;
+    --ink: #131311;
+    --steel: #84867F;
+    --hairline: #D8D8D2;
+    --redline: #C8331B;
+    --redline-ink: #FFFFFF;
+    --hatch-bg: #EDEDE9;
+    --hatch-line: #DCDCD6;
+
+    --sans: "Helvetica Neue", Helvetica, Arial, ui-sans-serif, sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
+
+    --display: clamp(2.4rem, 7vw, 5.6rem);
+    --h2: clamp(1.6rem, 3.4vw, 2.6rem);
+    --body: 1rem;
+    --small: 0.8125rem;
+    --tiny: 0.6875rem;
+
+    --gut: clamp(1.25rem, 4vw, 3rem);
+    --band: clamp(3.5rem, 8vw, 7rem);
+    --max: 1280px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #161615; --paper-2: #1D1D1B; --ink: #EAEAE6; --steel: #8F918A;
+      --hairline: #2E2E2B; --redline: #E86A47; --redline-ink: #16110E;
+      --hatch-bg: #202020; --hatch-line: #2C2C2A;
+    }
+  }
+  :root[data-theme="light"] {
+    --paper: #FAFAF9; --paper-2: #F1F1EE; --ink: #131311; --steel: #84867F;
+    --hairline: #D8D8D2; --redline: #C8331B; --redline-ink: #FFFFFF;
+    --hatch-bg: #EDEDE9; --hatch-line: #DCDCD6;
+  }
+  :root[data-theme="dark"] {
+    --paper: #161615; --paper-2: #1D1D1B; --ink: #EAEAE6; --steel: #8F918A;
+    --hairline: #2E2E2B; --redline: #E86A47; --redline-ink: #16110E;
+    --hatch-bg: #202020; --hatch-line: #2C2C2A;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: var(--body);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--redline); outline-offset: 3px;
+  }
+  .wrap { max-width: var(--max); margin: 0 auto; padding-inline: var(--gut); }
+  h1, h2, h3 { margin: 0; text-wrap: balance; }
+
+  .mono { font-family: var(--mono); }
+
+  /* ---- greybox strip ---- */
+  .gb {
+    font-family: var(--mono);
+    font-size: var(--tiny);
+    letter-spacing: 0.08em;
+    color: var(--steel);
+    border-bottom: 1px solid var(--hairline);
+    padding: 0.5rem var(--gut);
+    text-align: center;
+  }
+  .gb b { color: var(--redline); font-weight: 600; }
+
+  /* ---- masthead ---- */
+  .mast {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 2rem;
+    padding: 1.4rem var(--gut);
+    max-width: var(--max); margin: 0 auto;
+  }
+  .mast .name { font-weight: 700; font-size: 1.05rem; letter-spacing: 0.02em; }
+  .mast .name .fn { color: var(--redline); font-weight: 400; font-size: var(--tiny); vertical-align: super; font-family: var(--mono); }
+  .mast .locus { font-family: var(--mono); font-size: var(--tiny); color: var(--steel); letter-spacing: 0.06em; }
+  .mast nav { display: flex; gap: 1.75rem; font-family: var(--mono); font-size: var(--small); }
+  .mast nav a { color: var(--steel); }
+  .mast nav a:hover { color: var(--redline); }
+
+  /* ---- statement ---- */
+  .statement { padding-block: var(--band); border-top: 1px solid var(--hairline); }
+  .statement h1 {
+    font-size: var(--display);
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    max-width: 17ch;
+  }
+  .statement h1 em {
+    font-style: normal;
+    background: linear-gradient(var(--redline), var(--redline)) 0 92% / 100% 0.06em no-repeat;
+  }
+  .statement .annot {
+    font-family: var(--mono);
+    font-size: var(--small);
+    color: var(--steel);
+    margin: 2rem 0 0;
+    max-width: 52ch;
+  }
+  .statement .annot b { color: var(--redline); font-weight: 500; }
+
+  /* ---- index ---- */
+  .index { border-top: 1px solid var(--hairline); padding-block: 0 var(--band); }
+  .index-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: var(--mono); font-size: var(--tiny);
+    color: var(--steel); letter-spacing: 0.1em; text-transform: uppercase;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 3.5rem 1fr 10rem 6rem 4.5rem;
+    gap: 1rem; align-items: baseline;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--hairline);
+    font-size: var(--body);
+  }
+  .row .no, .row .type, .row .yr, .row .st {
+    font-family: var(--mono); font-size: var(--small); color: var(--steel);
+    font-variant-numeric: tabular-nums;
+  }
+  .row .pj { font-weight: 500; transition: color 0.2s ease, transform 0.3s ease; }
+  .row:hover .pj { color: var(--redline); transform: translateX(0.4rem); }
+  .row .st { text-align: right; }
+  .row:hover .no { color: var(--redline); }
+
+  /* hover thumbnail */
+  .row .peek {
+    position: absolute; right: 18%; top: 50%;
+    transform: translateY(-50%) scale(0.97);
+    width: min(240px, 24vw);
+    aspect-ratio: 4 / 3;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 3;
+    background:
+      repeating-linear-gradient(-45deg, transparent 0 10px, var(--hatch-line) 10px 11px),
+      var(--hatch-bg);
+    border: 1px solid var(--hairline);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+    display: flex; align-items: flex-end;
+  }
+  .row:hover .peek { opacity: 1; transform: translateY(-50%) scale(1); }
+  .peek .tag {
+    font-family: var(--mono); font-size: var(--tiny);
+    background: var(--paper); border-top: 1px solid var(--hairline);
+    padding: 0.25rem 0.5rem; margin: 0; width: 100%;
+    color: var(--steel);
+  }
+
+  /* ---- plates (mixed grid) ---- */
+  .plates { padding-block: var(--band); border-top: 1px solid var(--hairline); }
+  .plates-grid {
+    display: grid; grid-template-columns: repeat(12, 1fr);
+    gap: clamp(1rem, 2.5vw, 2rem);
+  }
+  .plate { border: 1px solid var(--hairline); background: var(--paper); display: flex; flex-direction: column; }
+  .plate .ph {
+    flex: 1;
+    background:
+      repeating-linear-gradient(-45deg, transparent 0 12px, var(--hatch-line) 12px 13px),
+      var(--hatch-bg);
+    display: flex; align-items: flex-end;
+    min-height: 0;
+  }
+  .plate .ph .tag {
+    font-family: var(--mono); font-size: var(--tiny); color: var(--steel);
+    background: var(--paper); border: 1px solid var(--hairline);
+    margin: 0.6rem; padding: 0.2rem 0.5rem;
+  }
+  .plate figcaption, .plate .cap {
+    font-family: var(--mono); font-size: var(--tiny); color: var(--steel);
+    border-top: 1px solid var(--hairline);
+    padding: 0.6rem 0.75rem;
+    display: flex; justify-content: space-between; gap: 1rem;
+  }
+  .plate.p6 { grid-column: span 6; aspect-ratio: 4 / 3; }
+  .plate.p4 { grid-column: span 4; aspect-ratio: 3 / 4; }
+  .plate.p8 { grid-column: span 8; aspect-ratio: 16 / 9; }
+
+  .plate.fact {
+    grid-column: span 4;
+    justify-content: space-between;
+    padding: 1rem;
+    background: var(--paper-2);
+  }
+  .plate.fact .num {
+    font-family: var(--mono);
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--redline);
+    font-variant-numeric: tabular-nums;
+  }
+  .plate.fact .lbl { font-family: var(--mono); font-size: var(--tiny); color: var(--steel); margin-top: 1rem; }
+
+  /* ---- approach ---- */
+  .approach { border-top: 1px solid var(--hairline); padding-block: var(--band); }
+  .approach h2 { font-size: var(--h2); font-weight: 700; letter-spacing: -0.015em; max-width: 22ch; }
+  .approach .cols {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    margin-top: 2.5rem;
+  }
+  .approach .col { border-top: 2px solid var(--ink); padding-top: 1rem; }
+  .approach .col h3 { font-size: var(--body); font-weight: 700; }
+  .approach .col p { color: var(--steel); font-size: var(--small); margin: 0.6rem 0 0; }
+  .approach .col .q { font-family: var(--mono); color: var(--redline); font-size: var(--tiny); }
+
+  /* ---- contact ---- */
+  .contact { border-top: 1px solid var(--hairline); padding-block: var(--band); }
+  .contact .cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 5rem); align-items: start; }
+  .contact h2 { font-size: var(--h2); font-weight: 700; }
+  .contact p.pitch { color: var(--steel); max-width: 46ch; }
+  form.inq { display: grid; gap: 1.1rem; font-family: var(--mono); }
+  .f { display: grid; gap: 0.35rem; }
+  .f label { font-size: var(--tiny); letter-spacing: 0.1em; text-transform: uppercase; color: var(--steel); }
+  .f input, .f textarea {
+    font: inherit; font-size: var(--small); color: var(--ink);
+    background: transparent; border: 1px solid var(--hairline);
+    padding: 0.65rem 0.75rem;
+  }
+  .f input:focus, .f textarea:focus { border-color: var(--redline); }
+  form.inq button {
+    justify-self: start; cursor: pointer;
+    font-family: var(--mono); font-size: var(--small); letter-spacing: 0.08em;
+    color: var(--redline-ink); background: var(--redline); border: 0;
+    padding: 0.85rem 1.8rem;
+  }
+  .wire { font-family: var(--mono); font-size: var(--tiny); color: var(--steel); margin-top: 1rem; }
+
+  /* ---- footer ---- */
+  .foot {
+    border-top: 1px solid var(--hairline);
+    max-width: var(--max); margin: 0 auto;
+    padding: 2rem var(--gut) 2.75rem;
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem;
+    font-family: var(--mono); font-size: var(--tiny); color: var(--steel);
+  }
+
+  /* ---- case study ---- */
+  .view { display: none; }
+  .view.active { display: block; }
+  .back { font-family: var(--mono); font-size: var(--small); color: var(--steel); display: inline-block; margin: 1.5rem 0 2rem; }
+  .back:hover { color: var(--redline); }
+  .case h1 { font-size: clamp(2rem, 5vw, 3.6rem); font-weight: 700; letter-spacing: -0.02em; }
+  .spec {
+    font-family: var(--mono); font-size: var(--small);
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    border: 1px solid var(--hairline); border-bottom: 0;
+    margin-top: 2rem;
+  }
+  .spec > div { border-bottom: 1px solid var(--hairline); padding: 0.8rem 0.9rem; border-right: 1px solid var(--hairline); }
+  .spec dt { color: var(--steel); font-size: var(--tiny); text-transform: uppercase; letter-spacing: 0.08em; }
+  .spec dd { margin: 0.2rem 0 0; }
+  .case-hero { margin-top: clamp(2rem, 5vw, 3.5rem); }
+  .case-hero .ph {
+    aspect-ratio: 21 / 9;
+    background:
+      repeating-linear-gradient(-45deg, transparent 0 14px, var(--hatch-line) 14px 15px),
+      var(--hatch-bg);
+    border: 1px solid var(--hairline);
+    display: flex; align-items: flex-end;
+  }
+  .case-hero .tag, .cs-ph .tag {
+    font-family: var(--mono); font-size: var(--tiny); color: var(--steel);
+    background: var(--paper); border: 1px solid var(--hairline);
+    margin: 0.6rem; padding: 0.2rem 0.5rem;
+  }
+  .case-body { max-width: 62ch; margin: var(--band) auto; }
+  .case-body p { color: var(--steel); margin: 0 0 1.3em; }
+  .case-body p:first-of-type { color: var(--ink); font-size: 1.1rem; }
+  .case-body .red { font-family: var(--mono); font-size: var(--small); color: var(--redline); }
+  .cs-pair { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 3vw, 2rem); margin-block: var(--band); }
+  .cs-ph {
+    background:
+      repeating-linear-gradient(-45deg, transparent 0 12px, var(--hatch-line) 12px 13px),
+      var(--hatch-bg);
+    border: 1px solid var(--hairline);
+    display: flex; align-items: flex-end;
+  }
+  .cs-pair .cs-ph { aspect-ratio: 4 / 5; }
+  .next { border-top: 1px solid var(--hairline); padding-block: var(--band); text-align: center; }
+  .next a { font-weight: 700; font-size: var(--h2); letter-spacing: -0.015em; }
+  .next a:hover { color: var(--redline); }
+  .next .k { display: block; font-family: var(--mono); font-size: var(--tiny); color: var(--steel); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.75rem; }
+
+  /* ---- reveal ---- */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .row .pj, .row .peek { transition: none; }
+  }
+
+  @media (max-width: 760px) {
+    .row { grid-template-columns: 2.5rem 1fr 4.5rem; }
+    .row .type, .row .st { display: none; }
+    .row .peek { display: none; }
+    .plates-grid { grid-template-columns: 1fr; }
+    .plate.p6, .plate.p4, .plate.p8, .plate.fact { grid-column: auto; }
+    .plate.p4 { aspect-ratio: 4 / 3; }
+    .approach .cols, .contact .cols { grid-template-columns: 1fr; }
+    .cs-pair { grid-template-columns: 1fr; }
+    .mast { flex-wrap: wrap; gap: 0.75rem; }
+  }
+</style>
+
+<div class="gb"><b>DIRECTION B — “THE INDEX” — GREYBOX</b> · equal-weight synthesis of all 13 references · hatched = photo pending Q4 · † = pending Q2/Q3</div>
+
+<header class="mast">
+  <div>
+    <a class="name" href="#/">Selkridge Architects <span class="fn">†Q2</span></a>
+    <div class="locus">EST. 19—† · —, —†Q2</div>
+  </div>
+  <nav>
+    <a href="#index" data-home-anchor>Index</a>
+    <a href="#approach" data-home-anchor>Approach</a>
+    <a href="#contact" data-home-anchor>Contact</a>
+  </nav>
+</header>
+
+<!-- ============ HOME ============ -->
+<main id="view-home" class="view active">
+
+  <section class="statement wrap">
+    <h1 class="reveal">Buildings people are <em>glad to live next to.</em></h1>
+    <p class="annot reveal"><b>REDLINE:</b> statement pending the firm's own words — this is a
+      placeholder thesis. One sentence, human, no jargon. (Heatherwick/MVRDV register,
+      tone decision → Q10)</p>
+  </section>
+
+  <section class="index wrap" id="index">
+    <div class="index-head">
+      <span>Project index — complete†</span>
+      <span>No. / Project / Type / Year / Status</span>
+    </div>
+
+    <a class="row" href="#/project">
+      <span class="no">012</span>
+      <span class="pj">Hillcrest Residence†</span>
+      <span class="type">Residential†</span>
+      <span class="yr">20—</span>
+      <span class="st">Built</span>
+      <span class="peek"><span class="tag">4:3 — exterior (Q4)</span></span>
+    </a>
+    <a class="row" href="#/project">
+      <span class="no">011</span>
+      <span class="pj">Meridian Hall†</span>
+      <span class="type">Commercial†</span>
+      <span class="yr">20—</span>
+      <span class="st">Built</span>
+      <span class="peek"><span class="tag">4:3 — interior (Q4)</span></span>
+    </a>
+    <a class="row" href="#/project">
+      <span class="no">010</span>
+      <span class="pj">Waterline Renovation†</span>
+      <span class="type">Historic reno†</span>
+      <span class="yr">20—</span>
+      <span class="st">Built</span>
+      <span class="peek"><span class="tag">4:3 — detail (Q4)</span></span>
+    </a>
+    <a class="row" href="#/project">
+      <span class="no">009</span>
+      <span class="pj">Orchard House†</span>
+      <span class="type">Residential†</span>
+      <span class="yr">20—</span>
+      <span class="st">Built</span>
+      <span class="peek"><span class="tag">4:3 — landscape (Q4)</span></span>
+    </a>
+    <a class="row" href="#/project">
+      <span class="no">008</span>
+      <span class="pj">Foundry Offices†</span>
+      <span class="type">Commercial†</span>
+      <span class="yr">20—</span>
+      <span class="st">On site</span>
+      <span class="peek"><span class="tag">4:3 — elevation (Q4)</span></span>
+    </a>
+    <a class="row" href="#/project">
+      <span class="no">007</span>
+      <span class="pj">Chapel Green†</span>
+      <span class="type">Institutional†</span>
+      <span class="yr">20—</span>
+      <span class="st">Built</span>
+      <span class="peek"><span class="tag">4:3 — dusk (Q4)</span></span>
+    </a>
+    <p class="annot mono" style="font-size: var(--tiny); color: var(--steel); margin-top: 1rem;">
+      Full index, oldest at the bottom — the whole body of work is the homepage
+      (Bilbao/Chipperfield). Hover a row for its photograph. Real numbering starts
+      at the firm's first job†.
+    </p>
+  </section>
+
+  <section class="plates wrap">
+    <div class="plates-grid">
+      <figure class="plate p6 reveal" style="margin:0;">
+        <div class="ph"><span class="tag">PLATE — best exterior the firm owns (Q4)</span></div>
+        <figcaption><span>Hillcrest Residence†</span><span>012</span></figcaption>
+      </figure>
+      <div class="plate fact reveal">
+        <div class="num">—†</div>
+        <div class="lbl">YEARS IN PRACTICE — real number or nothing (no padded stats)</div>
+      </div>
+      <figure class="plate p4 reveal" style="margin:0;">
+        <div class="ph"><span class="tag">PLATE — vertical detail (Q4)</span></div>
+        <figcaption><span>Waterline Renovation†</span><span>010</span></figcaption>
+      </figure>
+      <figure class="plate p8 reveal" style="margin:0;">
+        <div class="ph"><span class="tag">PLATE — wide interior (Q4)</span></div>
+        <figcaption><span>Meridian Hall†</span><span>011</span></figcaption>
+      </figure>
+      <div class="plate fact reveal">
+        <div class="num">—†</div>
+        <div class="lbl">PROJECTS COMPLETED — from the index count</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="approach wrap" id="approach">
+    <h2 class="reveal">A small practice, on purpose.</h2>
+    <div class="cols">
+      <div class="col reveal">
+        <h3>Led personally</h3>
+        <p>The principal walks every site, draws every set, answers his own
+           phone. <span class="q">†Q3 — real narrative</span></p>
+      </div>
+      <div class="col reveal">
+        <h3>Built to be kept</h3>
+        <p>Materials and details chosen for the decade after the photographs,
+           not the week of them. <span class="q">†Q3</span></p>
+      </div>
+      <div class="col reveal">
+        <h3>Of this place</h3>
+        <p>—† years of building in —†, its climate, its codes, its
+           trades. <span class="q">†Q2</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact wrap" id="contact">
+    <div class="cols">
+      <div class="reveal">
+        <h2>Start with a conversation.</h2>
+        <p class="pitch">Tell us what you're imagining — a house, a renovation,
+          a building for your business. First conversations cost nothing and
+          commit you to nothing.</p>
+        <p class="wire">WIRE-UP NOTE: HubSpot Forms API (D3) + second destination (D4).
+          Custom form, no HubSpot branding (R4).</p>
+      </div>
+      <form class="inq reveal" onsubmit="event.preventDefault()">
+        <div class="f"><label for="b-name">Name</label><input id="b-name" type="text" autocomplete="name"></div>
+        <div class="f"><label for="b-email">Email</label><input id="b-email" type="email" autocomplete="email"></div>
+        <div class="f"><label for="b-msg">What are you imagining?</label><textarea id="b-msg" rows="4"></textarea></div>
+        <button type="submit">Send inquiry</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<!-- ============ CASE STUDY ============ -->
+<main id="view-project" class="view">
+  <div class="wrap case">
+    <a class="back" href="#/">&larr; 012 of —† · back to index</a>
+    <h1>Hillcrest Residence†</h1>
+    <dl class="spec">
+      <div><dt>No.</dt><dd>012</dd></div>
+      <div><dt>Location</dt><dd>—†Q2</dd></div>
+      <div><dt>Type</dt><dd>Residential†Q3</dd></div>
+      <div><dt>Completed</dt><dd>20—†</dd></div>
+      <div><dt>Status</dt><dd>Built &amp; occupied</dd></div>
+      <div><dt>Photography</dt><dd>—†Q4</dd></div>
+    </dl>
+
+    <div class="case-hero">
+      <div class="ph" role="img" aria-label="Placeholder for establishing photograph">
+        <span class="tag">21:9 — establishing shot, building in its landscape (Q4)</span>
+      </div>
+    </div>
+
+    <div class="case-body">
+      <p>Open with the client's problem in one paragraph a homeowner would
+        recognize themselves in.†</p>
+      <p class="red">REDLINE: the two or three real decisions that shaped the building,
+        told plainly — why it turns from the street, what the budget forced,
+        what it freed. Stories come from Q3 + a conversation per project.</p>
+      <p>Copy stays short. Photography carries the argument (R2); the text is
+        the margin note, spec-sheet factual, never brochure-speak.</p>
+    </div>
+
+    <div class="cs-pair">
+      <div class="cs-ph reveal" role="img" aria-label="Placeholder detail photograph, left">
+        <span class="tag">4:5 — joinery / stair detail (Q4)</span>
+      </div>
+      <div class="cs-ph reveal" role="img" aria-label="Placeholder detail photograph, right">
+        <span class="tag">4:5 — light study (Q4)</span>
+      </div>
+    </div>
+
+    <div class="next">
+      <span class="k">Next in index</span>
+      <a href="#/project">011 — Meridian Hall† &rarr;</a>
+    </div>
+  </div>
+</main>
+
+<footer class="foot">
+  <span>© 20— SELKRIDGE ARCHITECTS†Q2 · — STREET, —†Q2</span>
+  <span>† = PENDING: NAME (Q2) · WORK MIX (Q3) · PHOTOGRAPHY (Q4) · TRACKER: arch-site/TRACKER.md</span>
+</footer>
+
+<script>
+  (function () {
+    var home = document.getElementById('view-home');
+    var proj = document.getElementById('view-project');
+
+    function route() {
+      var p = location.hash === '#/project';
+      home.classList.toggle('active', !p);
+      proj.classList.toggle('active', p);
+      window.scrollTo(0, 0);
+      watch();
+    }
+
+    document.querySelectorAll('[data-home-anchor]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        if (location.hash === '#/project') {
+          var t = a.getAttribute('href');
+          location.hash = '#/';
+          setTimeout(function () {
+            var el = document.querySelector(t);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }, 50);
+        }
+      });
+    });
+
+    var io = null;
+    function watch() {
+      if (!('IntersectionObserver' in window) ||
+          window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      if (io) io.disconnect();
+      io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.view.active .reveal').forEach(function (el) {
+        if (!el.classList.contains('in')) io.observe(el);
+      });
+    }
+
+    window.addEventListener('hashchange', route);
+    route();
+  })();
+</script>

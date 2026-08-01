@@ -20,8 +20,8 @@
 | | |
 |---|---|
 | **Phase** | 1 — mockup |
-| **Blocked on** | Aaron: feedback on greybox v3 |
-| **Next deliverable** | Greybox v4, revised from Aaron's feedback |
+| **Blocked on** | Aaron: pick a direction — A (quiet editorial) or B (the index) |
+| **Next deliverable** | Iterate the chosen direction from Aaron's feedback |
 | **Nothing is live** | no site scaffold, no domain, no HubSpot portal yet |
 
 ---
@@ -75,10 +75,16 @@ Legend: ⏳ in flight · 📦 boxed, deliberately deferred · ✅ answered
       question they wait on (†Q2/Q3/Q4). v2: varied-aspect work grid, Est.
       anchor, recognition band, address in footer. v3: full-bleed heroes,
       work-category filter hint (Van Duysen).
-- [ ] **Wait on Aaron** — greybox v3 feedback, then iterate
+- [x] Direction B, "The Index" (`arch-site/mockups/index-ledger.html`, own
+      Artifact): fresh equal-weight synthesis of all 13 refs — text-first
+      statement (no hero image), full project index as the homepage with
+      hover photo previews, plates grid with fact tiles, redline-red accent,
+      mono spec-sheet metadata. Built at Aaron's request as an alternative
+      to A, not an iteration of it.
+- [ ] **Wait on Aaron** — choose direction A or B (or a hybrid), then iterate
 
 ### Next
-- [ ] Greybox v4 from feedback; repeat until the feel is right
+- [ ] Iterate the chosen direction; repeat until the feel is right
 - [ ] Answering Q2–Q4 replaces the † placeholders (name, work mix, photos)
 
 ### Later
